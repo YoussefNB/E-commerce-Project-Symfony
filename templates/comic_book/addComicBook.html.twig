@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %} 
+{% block title %} Add ComicBook {% endblock %}
+{% block body %}
+<style>
+.form-container {
+    display:flex;
+    flex-direction:column;
+    justify-content:space-around;
+    align-items:center;
+    align-content:center;
+    height:500px;
+}
+</style>
+
+<div class="container">
+    <div class="form-container">
+    <h2> Add a Comic-book </h2>
+
+    {{ form_start(f) }}
+        {{ form_widget(f) }}
+    {{ form_end(f) }}
+    </div>
+</div>
+{% endblock %}

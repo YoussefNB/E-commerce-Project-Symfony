@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\ComicBookImage;
+use App\Entity\Editor;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ComicBookRepository")
@@ -57,6 +59,12 @@ class ComicBook
      * @ORM\Column(type="float")
      */
     private $cb_price;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Editor")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $editor;
 
     public function getId(): ?int
     {
@@ -155,6 +163,23 @@ class ComicBook
         return($this->cb_image);
     }
 
+
+    //In order for the addComicBook.html.twig to work.
+    /**
+     * Get image
+     * @return ComicBookImage
+     */
+    public function getCbImageId() : ?ComicBookImage
+    { 
+        return($this->cb_image);
+    }
+
+    public function setCbImageId(ComicBookImage $cb_image) 
+    {
+        $this->cb_image=$cb_image;
+        return($this);
+    }
+
     public function getCbPrice(): ?float
     {
         return $this->cb_price;
@@ -165,5 +190,22 @@ class ComicBook
         $this->cb_price = $cb_price;
 
         return $this;
+    }
+
+    public function getEditor(): ?Editor
+    {
+        return $this->editor;
+    }
+
+    public function setEditor(?Editor $editor): self
+    {
+        $this->editor = $editor;
+
+        return $this;
+    }
+
+    public function getEditorId(): ?Editor
+    {
+        return $this->editor;
     }
 }

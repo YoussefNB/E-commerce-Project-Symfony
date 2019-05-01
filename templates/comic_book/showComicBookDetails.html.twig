@@ -36,8 +36,6 @@
     }
 </style>
 
-    
-
 <div class="container">
     <div class="comicBook-container">
         <div>
@@ -49,7 +47,7 @@
                 <li>Name : {{comicBook.getCbName()}}</li>
                 <li>Date : {{comicBook.getCbYear()}}</li>
                 <li>Main Superhero : {{comicBook.getCbMainSuperhero()}}</li>
-                <li>Editor : {{comicBook.getCbEditor()}}</li>
+                <li>Editor : {{editor.getEditorName()}}</li>
                 <li>Price : <span style="font-weight:bold">{{comicBook.getCbPrice()}}</li>
                 <li>
                 <h4>Description : </h4>
@@ -58,7 +56,6 @@
             </ul>
             <button type="button" class="btn btn-outline-danger waves-effect">Purchase</button>
         </div>
-
     </div>
 </div>
 
