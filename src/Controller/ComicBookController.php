@@ -100,7 +100,7 @@ class ComicBookController extends AbstractController
         ->add('cb_name',TextType::class)
         ->add('cb_year',TextType::class)
         ->add('cb_creator',TextType::class)
-        ->add('cb_description',TextType::class)
+        ->add('cb_description',TextareaType::class)
         ->add('cb_main_superhero',TextType::class)
         ->add('cb_image_id',EntityType::class,['class'=> ComicBookImage::class ,'choice_label' => 'id'])
         ->add('cb_main_superhero',TextType::class)
