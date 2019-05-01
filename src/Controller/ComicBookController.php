@@ -107,9 +107,17 @@ class ComicBookController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($comicBookImage);
             $em->flush();
-            return $this->redirectToRoute('comicBook_add');  
+            return $this->redirectToRoute('comicBook_add_step2');  
         }
 
+        return($this->render('comic_book/add-ComicBook-step1.html.twig',['imgform'=> $imageForm->createView()]));
+    }
+
+    /**
+     * @Route("/add/step2",name="comicBook_add_step2")
+     */
+    public function add_ComicBook(Request $request) 
+    {
         $comicBook = new ComicBook();
         $formBuiler = $this->createFormBuilder($comicBook)
         ->add('cb_name',TextType::class)
@@ -130,9 +138,9 @@ class ComicBookController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($comicBook);
             $em->flush();
-            return $this->redirectToRoute('comicBook_add');
+            return $this->redirectToRoute('comicBook_show',array('id' => $comicBook->getId()));
         }
 
-        return($this->render('comic_book/addComicBook.html.twig',['f' => $form->createView(),'imgform'=> $imageForm->createView()]));
+        return($this->render('comic_book/add-ComicBook-step2.html.twig',['f' => $form->createView()]));
     }
 }
