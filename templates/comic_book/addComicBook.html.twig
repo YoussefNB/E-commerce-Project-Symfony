@@ -5,11 +5,14 @@
 .form-container {
     display:flex;
     flex-direction:column;
-    justify-content:space-between;
+    justify-content:center;
     align-content:center;
     width:55%;
 }
 
+.image-form-container {
+    align-items:center;
+}
 .one-info-container {
     display:flex;
     flex-direction:row;
@@ -30,53 +33,77 @@
 }
 .whole-section-container {
     padding:60px;
+    display:flex;
+    flex-direction:row;
+
+}
+.img-input { 
+    margin-left:10px;
 }
 </style>
 
 <div class="container whole-section-container">
-    <h2> Add a Comic-book </h2>
+    <div class="form-container image-form-container">
+        {{ form_start(imgform) }}
+        <h2> Add Image </h2>
+        <div class="one-section-container">
+            <div class="one-info-container">
+                <h5>Image Url </h5>
+                {{ form_widget(imgform.cb_image_url,{'attr': {'class': 'img-input'}}) }}
+            </div>
+            <div class="one-info-container">
+                <h5>Image Alt  </h5>
+                {{ form_widget(imgform.cb_image_alt) }}
+            </div>
+            <div class="submit-container">
+                {{ form_widget(imgform.submit, {'attr': {'class': 'btn btn-danger'}}) }}
+            </div>
+        </div>
+        {{ form_end(imgform) }}
+    </div>
     <div class="form-container">
-    {{ form_start(f) }}
-    <div class="one-section-container" style="border-top:1px solid black;border-right:1px solid black;">
-        <div class="one-info-container">
-            <h5>Name </h5>
-            {{ form_widget(f.cb_name) }}
+        {{ form_start(f) }}
+        <h2> Add a Comic-book </h2>
+        <div class="one-section-container" style="border-top:1px solid black;border-right:1px solid black;">
+            <div class="one-info-container">
+                <h5>Name </h5>
+                {{ form_widget(f.cb_name) }}
+            </div>
+            <div class="one-info-container">
+                <h5>Creator  </h5>
+                {{ form_widget(f.cb_creator) }}
+            </div>
+            <div class="one-info-container">
+                <h5>Year  </h5>
+                {{ form_widget(f.cb_year) }}
+            </div>
+            <div class="one-info-container">
+                <h5>Editor  </h5>
+                {{ form_widget(f.editor) }}
+            </div>
         </div>
-        <div class="one-info-container">
-            <h5>Creator  </h5>
-            {{ form_widget(f.cb_creator) }}
+        <div class="one-section-container"  style="border-bottom:1px solid black;border-left:1px solid black;">
+            <div class="one-info-container">
+                <h5>Description  </h5>
+                {{ form_widget(f.cb_description) }}
+            </div>
+            <div class="one-info-container">
+                <h5>Main Hero   </h5>
+                {{ form_widget(f.cb_main_superhero) }}
+            </div>
+            <div class="one-info-container">
+                <h5>Image from DB  </h5>
+                {{ form_widget(f.cb_image_id) }}
+            </div>
+            <div class="one-info-container">
+                <h5>Price  </h5>
+                {{ form_widget(f.cb_price) }}
+            </div>
         </div>
-        <div class="one-info-container">
-            <h5>Year  </h5>
-            {{ form_widget(f.cb_year) }}
+        <div class="submit-container">
+            {{ form_widget(f.submit, {'attr': {'class': 'btn btn-danger'}}) }}
         </div>
-        <div class="one-info-container">
-            <h5>Editor  </h5>
-            {{ form_widget(f.editor) }}
-        </div>
-    </div>
-    <div class="one-section-container"  style="border-bottom:1px solid black;border-left:1px solid black;">
-        <div class="one-info-container">
-            <h5>Description  </h5>
-            {{ form_widget(f.cb_description) }}
-        </div>
-        <div class="one-info-container">
-            <h5>Main Hero   </h5>
-            {{ form_widget(f.cb_main_superhero) }}
-        </div>
-        <div class="one-info-container">
-            <h5>Image from DB  </h5>
-            {{ form_widget(f.cb_image_id) }}
-        </div>
-        <div class="one-info-container">
-            <h5>Price  </h5>
-            {{ form_widget(f.cb_price) }}
-        </div>
-    </div>
-    <div class="submit-container">
-        {{ form_widget(f.submit, {'attr': {'class': 'btn btn-danger'}}) }}
-    </div>
-    {{ form_end(f) }}
+        {{ form_end(f) }}
     </div>
 </div>
 {% endblock %}

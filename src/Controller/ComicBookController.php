@@ -95,6 +95,21 @@ class ComicBookController extends AbstractController
      */
     public function add(Request $request) 
     {
+        $comicBookImage = new ComicBookImage();
+        $imageFormBuilder = $this->createFormBuilder($comicBookImage)
+        ->add('cb_image_url',TextType::class)
+        ->add('cb_image_alt',TextType::class)
+        ->add('submit',SubmitType::class);
+        $imageForm = $imageFormBuilder->getForm();
+        $imageForm->handleRequest($request);
+
+        if($imageForm->isSubmitted()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comicBookImage);
+            $em->flush();
+            return $this->redirectToRoute('comicBook_add');  
+        }
+
         $comicBook = new ComicBook();
         $formBuiler = $this->createFormBuilder($comicBook)
         ->add('cb_name',TextType::class)
@@ -103,7 +118,7 @@ class ComicBookController extends AbstractController
         ->add('cb_description',TextareaType::class)
         ->add('cb_main_superhero',TextType::class)
         ->add('cb_image_id',EntityType::class,['class'=> ComicBookImage::class ,'choice_label' => 'id'])
-        ->add('cb_main_superhero',TextType::class)
+        ->add('cb_main_superhero',TextType::class) 
         ->add('cb_price',NumberType::class)
         ->add('editor',EntityType::class,['class'=> Editor::class ,'choice_label' => 'editor_name'])
         ->add('submit',SubmitType::class);
@@ -115,10 +130,9 @@ class ComicBookController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($comicBook);
             $em->flush();
-
-            return $this->redirectToRoute('comicBook');
+            return $this->redirectToRoute('comicBook_add');
         }
 
-        return($this->render('comic_book/addComicBook.html.twig',['f' => $form->createView()]));
+        return($this->render('comic_book/addComicBook.html.twig',['f' => $form->createView(),'imgform'=> $imageForm->createView()]));
     }
 }
