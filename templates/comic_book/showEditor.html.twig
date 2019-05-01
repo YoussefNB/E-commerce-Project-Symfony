@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{editor.getEditorName()}} ComicBooks{% endblock %}
+
+{% block body %}
+
+<style>
+.cards-wrapper {
+    display:flex;
+    flex-direction:row;
+    border:2px solid red;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.card-wrapper {
+    margin:50px;
+    padding:10px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    /*border:1px dashed black;*/
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+
+}
+.card-img {
+    text-align:center;
+}
+
+.wrap {
+    width: 100%;
+}
+.image {
+    background-image: url("{{editor.getEditorImageUrl()}}");
+    background-repeat: no-repeat;
+    background-position: center; 
+    position: relative;
+    height: 100vh;
+    background-size: 100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;;
+    align-items: center;
+    align-content:center;
+}
+.image:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+}
+.text {
+    color: #FFF;
+    position: relative;
+    border:2px solid white;
+    padding:50px;
+    width:600px;
+
+}
+#intro-title {
+    color:red;
+    font-weight:bold
+}
+
+</style>
+
+<div class="wrap">
+    <div class="image">
+        <div class="text">
+        <div style="text-align:center;">
+            <h1 id="intro-title">{{editor.getEditorName()}}</h1>
+            <p>{{editor.getEditorDescription()}}</p>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="cards-wrapper">
+{% for comicBook in comicBooks %}
+<div class="card-wrapper">
+    <div class="card-img">
+        <img width="200" height="300" src="{{comicBook.getCbImage().getCbImageUrl()}}" alt="{{comicBook.getCbImage().getCbImageAlt()}}" />
+    </div>
+    <div style="text-align:center;margin-top:5px;">
+        <div>
+            <h4 class="card-title"><a>{{comicBook.getCbName()}}</a></h4>
+            <p>Price : {{comicBook.getCbPrice()}} dt</p>
+        </div>
+        <a href="{{path('comicBook_show',{'id':comicBook.getId()})}}" class="btn btn-danger">More details</a>
+    </div>
+</div>
+{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ComicBookController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper {
+        margin: 1em auto;
+        max-width: 800px;
+        width: 95%;
+        font: 18px/1.5 sans-serif;
+    }
+
+    .example-wrapper code {
+        background: #F5F5F5;
+        padding: 2px 6px;
+    }
+
+    .wrap {
+        width: 100%;
+    }
+
+    .image {
+        background-image: url("https://wallup.net/wp-content/uploads/2015/07/comics-artwork-Marvel-Comics-Red-Hulk-Marvel-748x391.jpg");
+        background-repeat: no-repeat;
+        background-position: top;
+        position: relative;
+        height: 87vh;
+        background-size: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+
+    .image:before {
+        content: '';
+        position:absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .text {
+        color:white;
+        position: relative;
+        padding: 50px;
+        width: 600px;
+        margin-right:100px
+    }
+    .intro-image-editor {
+        height: 390 ;
+        width: 290 ; 
+    }
+    .editor-presentation-container {
+        display:flex;
+        flex-direction:row;
+        justify-content: space-around;
+        padding:10px;
+    }
+    .editor-presentation-description-container {
+        display:flex;
+        align-items: center;
+        padding:50px;
+    }
+    .editors-presentation-container {
+        margin-top:20px;
+    }
+
+</style>
+
+    <div class="wrap">
+        <div class="image">
+            <div class="text">
+                <div>
+                    <h1 id="intro-title" class="h1-responsive">🙋‍♂️ Welcome to ComicBoi</h1>
+                    <h3 class="h3-responsive">Your favorite Comic book shop &#128523;!</h3>
+                    <br>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam. nde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container editors-presentation-container">
+        <div class="editor-presentation-container">
+            <div>
+                <a href="{{path('comicBook_showEditor', {editor:"Marvel"})}}"><img width="280" height="280" class="intro-image-editor" src="http://assets.stickpng.com/thumbs/585f9333cb11b227491c3581.png" alt="Marvel Logo" /></a>
+            </div>
+            <div class="editor-presentation-description-container" style="border-left:1px solid black;"> 
+                <h6 class="h5-responsive">otam rem aperiam. nde omnis iste natus error sit voluptatem accusantium doloremque laudtium, totm aperiste natus error sit v nde omnis iste natus error sit voluptatem accusantium doloremque laudtium, totm aperiste natus error sit voluptatem accusa oluptatem accusantium doloremque laudantium, totam rem aperiam iam, nde omnis is.</h6>
+            </div>
+        </div>
+        <div class="editor-presentation-container">
+            <div class="editor-presentation-description-container" style="border-right:1px solid black;">
+                <h6 class="h5-responsive">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit que.</h6>
+            </div>
+             <div>
+                <a href="{{path('comicBook_showEditor', {editor:"DC"})}}"><img width="280" height="280" class="intro-image-editor" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/DC_Comics_logo.png/280px-DC_Comics_logo.png" alt="DC Comics Logo" /></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
