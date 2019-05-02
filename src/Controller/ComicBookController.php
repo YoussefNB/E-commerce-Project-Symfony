@@ -168,4 +168,27 @@ class ComicBookController extends AbstractController
             'comicBooks' =>$comicBooks,'query' =>$searchQuery
         ]);
     }
+
+    /**
+     * @Route("/remove", name="comicBook_remove")
+     */
+    public function remove(Request $request)
+    {
+        $comicBook = new ComicBook();
+        $formBuiler = $this->createFormBuilder($comicBook)
+        ->add('cb_name',EntityType::class,['class'=> ComicBook::class ,'choice_label' => 'cb_name'])
+        ->add('submit',SubmitType::class);
+
+        $form = $formBuiler->getForm();
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($comicBook);
+            $em->flush();
+            return $this->redirectToRoute('comicBook');
+        }
+
+        return($this->render('comic_book/remove-ComicBook.html.twig',['f' => $form->createView()]));
+    }
 }

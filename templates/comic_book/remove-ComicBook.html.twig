@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %} 
+{% block title %} Remove ComicBook {% endblock %}
+{% block body %}
+<style>
+.form-container {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-content:center;
+    width:55%;
+}
+
+.image-form-container {
+    align-items:center;
+}
+.one-info-container {
+    display:flex;
+    flex-direction:row;
+    justify-content : space-between;
+    align-items:center;
+    align-content:center;
+    padding : 8px;
+}
+
+.one-section-container {
+    margin-top:6px;
+    padding:15px;
+
+}
+.submit-container {
+    text-align:center; 
+    margin-top:20px;
+}
+.whole-section-container {
+    padding:60px;
+    display:flex;
+    flex-direction:row;
+
+}
+.img-input { 
+    margin-left:50px;
+}
+</style>
+
+<div class="container whole-section-container">
+    <div class="form-container image-form-container">
+        {{ form_start(f) }}
+        <h2> Remove a ComicBook</h2>
+        <div class="one-section-container">
+            <div class="one-info-container">
+                <h5>Name  </h5>
+                {{ form_widget(f.cb_name,{'attr': {'class': 'img-input browser-default custom-select'}}) }}
+            </div>
+             <div class="submit-container">
+                {{ form_widget(f.submit, {'attr': {'class': 'btn btn-danger'}}) }}
+            </div>
+        </div>
+        {{ form_end(f) }}
+    </div>
+</div>
+{% endblock %}
