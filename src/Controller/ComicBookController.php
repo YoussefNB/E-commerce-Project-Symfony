@@ -75,7 +75,7 @@ class ComicBookController extends AbstractController
 
         if (!$comicBooks) {
             throw $this->createNotFoundException(
-                'No Products found for the category '.$editor
+                'No ComicBooks found from the editor '.$editor
             );
         }
 
@@ -125,7 +125,7 @@ class ComicBookController extends AbstractController
         ->add('cb_creator',TextType::class)
         ->add('cb_description',TextareaType::class)
         ->add('cb_main_superhero',TextType::class)
-        ->add('cb_image_id',EntityType::class,['class'=> ComicBookImage::class ,'choice_label' => 'id'])
+        ->add('cb_image_id',EntityType::class,['class'=> ComicBookImage::class ,'choice_label' => 'cb_image_alt'])
         ->add('cb_main_superhero',TextType::class) 
         ->add('cb_price',NumberType::class)
         ->add('editor',EntityType::class,['class'=> Editor::class ,'choice_label' => 'editor_name'])
@@ -142,5 +142,30 @@ class ComicBookController extends AbstractController
         }
 
         return($this->render('comic_book/add-ComicBook-step2.html.twig',['f' => $form->createView()]));
+    }
+
+    /**
+     * @Route("/search", name="comicBook_search")
+     */
+    public function search(Request $request)
+    {
+        $searchQuery = $request->get('search-navbar');
+        $repository = $this->getDoctrine()
+        ->getRepository(ComicBook::class);
+
+        $comicBooks = $repository->findBy(
+            ['cb_mainSuperhero' => $searchQuery],
+            ['cb_price' => 'ASC']
+        );    
+
+        if (!$comicBooks) {
+            throw $this->createNotFoundException(
+                'No ComicBooks found for query :  '.$searchQuery
+            );
+        }
+
+        return $this->render('comic_book/showQuery.html.twig', [
+            'comicBooks' =>$comicBooks,'query' =>$searchQuery
+        ]);
     }
 }

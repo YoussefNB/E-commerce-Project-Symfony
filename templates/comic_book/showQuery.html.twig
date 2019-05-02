@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{query}} ComicBooks{% endblock %}
+
+{% block body %}
+
+<style>
+.cards-wrapper {
+    display:flex;
+    flex-direction:row;
+    border:2px solid red;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.card-wrapper {
+    margin:50px;
+    padding:10px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    /*border:1px dashed black;*/
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+
+}
+.card-img {
+    text-align:center;
+}
+</style>
+
+<div class="cards-wrapper">
+{% for comicBook in comicBooks %}
+<div class="card-wrapper">
+    <div class="card-img">
+        <img width="200" height="300" src="{{comicBook.getCbImage().getCbImageUrl()}}" alt="{{comicBook.getCbImage().getCbImageAlt()}}" />
+    </div>
+    <div style="text-align:center;margin-top:5px;">
+        <div>
+            <h4 class="card-title"><a>{{comicBook.getCbName()}}</a></h4>
+            <p>Price : {{comicBook.getCbPrice()}} dt</p>
+        </div>
+        <a href="{{path('comicBook_show',{'id':comicBook.getId()})}}" class="btn btn-danger">More details</a>
+    </div>
+</div>
+{% endfor %}
+</div>
+{% endblock %}
